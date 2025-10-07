@@ -7,11 +7,17 @@ FROM gradle:8.6.0-jdk21 as builder
 # Define el directorio de trabajo dentro del contenedor
 WORKDIR /app
 
-# Copia los archivos de configuración de Gradle y el código fuente
+# Copia los archivos del Gradle Wrapper y de configuración primero.
+# Esto incluye: el script ejecutable, y el directorio del wrapper.
+COPY gradlew .
+COPY gradle/wrapper/ gradle/wrapper/
 COPY build.gradle settings.gradle ./
+
+# Copia el código fuente de la aplicación
 COPY src ./src
 
 # Otorga permisos de ejecución al script de Gradle wrapper
+# Ahora 'gradlew' existe y el comando tendrá éxito.
 RUN chmod +x ./gradlew
 
 # Ejecuta el build para generar el JAR ejecutable de Spring Boot.
