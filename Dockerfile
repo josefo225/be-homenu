@@ -28,7 +28,7 @@ RUN gradle bootJar --no-daemon -x test
 # ETAPA 2: RUNTIME (Ejecución)
 # Usa una imagen ligera con solo el JRE para la ejecución final.
 # -----------------------------------------------------------------
-FROM openjdk:21-jre-slim
+FROM eclipse-temurin:21-alpine
 
 # Define el puerto que escuchará la aplicación.
 # Cloud Run inyecta la variable de entorno PORT (por defecto 8080).
